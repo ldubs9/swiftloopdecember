@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftLoop | Simple Web Solutions</title>
+    <meta name="description" content="SwiftLoop helps bring basic websites and web presence to people that are not very good with technology.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            primary: '#3b82f6',
+                            accent: '#10b981',
+                            light: '#f8fafc'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for things Tailwind can't do easily */
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Custom Phone Input Styles */
+        .custom-select-wrapper {
+            position: relative;
+            user-select: none;
+        }
+        .custom-select {
+            position: relative;
+            cursor: pointer;
+        }
+        .custom-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            background: white;
+            transition: all 0.3s opacity;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            z-index: 50;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 0.5rem 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .custom-select.open .custom-options {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        .option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .option:hover {
+            background-color: #f1f5f9;
+        }
+        .selected-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: 100%;
+        }
+        
+        /* Smooth Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased">
+
+    <!-- Dynamic Favicon Generation Script -->
+    <script>
+        // Generate a simple SVG favicon on the fly
+        const link = document.createElement('link');
+        link.type = 'image/svg+xml';
+        link.rel = 'icon';
+        link.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%233b82f6"/><path d="M30 50 Q 50 20 70 50 T 30 50" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/></svg>`;
+        document.head.appendChild(link);
+    </script>
+
+    <!-- Loader -->
+    <div id="loader">
+        <div class="flex flex-col items-center">
+            <svg class="w-16 h-16 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="mt-4 text-brand-primary font-semibold">Loading SwiftLoop...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-slate-900">Swift<span class="text-blue-500">Loop</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#how-it-works" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">How it Works</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Pricing</a>
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg shadow-blue-500/30">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#how-it-works" class="block px-3 py-3 rounded-md text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50">How it Works</a>
+                <a href="#pricing" class="block px-3 py-3 rounded-md text-base font-medium text-slate-600 hover:text-blue-600 hover:bg-slate-50">Pricing</a>
+                <a href="#contact" class="block px-3 py-3 mt-4 text-center rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700">Get Started Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="blob bg-blue-300 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="blob bg-green-200 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-semibold text-sm tracking-wide uppercase shadow-sm fade-in-up">
+                    We handle the tech so you don't have to
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-slate-900 fade-in-up">
+                    Your Business Needs a <br>
+                    <span class="gradient-text">Great Website.</span>
+                </h1>
+                <p class="text-xl text-slate-600 mb-10 leading-relaxed fade-in-up delay-100">
+                    Confused by domains, hosting, and HTML? We make it simple. Get a professional website designed, hosted, and managed for you. No technical skills required.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-up delay-200">
+                    <a href="#pricing" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                        View Packages
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full font-bold text-lg shadow-sm transition-all hover:border-slate-300">
+                        Start Free Trial
+                    </a>
+                </div>
+                
+                <p class="mt-6 text-sm text-slate-500 flex justify-center items-center gap-2 fade-in-up delay-300">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    2-Week Free Trial. No Credit Card Required upfront.
+                </p>
+            </div>
+        </div>
+
+        <!-- Animated Feature Showcase -->
+        <div class="mt-20 max-w-6xl mx-auto px-4 perspective-1000">
+            <div class="relative bg-white rounded-2xl shadow-2xl border border-slate-200 p-2 md:p-4 transform rotate-x-12 mx-auto max-w-4xl hero-dashboard overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-green-400"></div>
+                <div class="bg-slate-50 rounded-xl p-4 md:p-8 min-h-[300px] flex flex-col items-center justify-center border border-slate-100">
+                    <!-- Simple animation elements -->
+                    <div class="flex gap-4 mb-8 w-full max-w-md">
+                        <div class="h-4 bg-slate-200 rounded w-1/4 animate-pulse"></div>
+                        <div class="h-4 bg-slate-200 rounded w-1/4 animate-pulse delay-75"></div>
+                        <div class="h-4 bg-slate-200 rounded w-1/4 animate-pulse delay-150"></div>
+                        <div class="h-4 bg-slate-200 rounded w-1/4 animate-pulse delay-300"></div>
+                    </div>
+                    <div class="w-full max-w-md space-y-4">
+                        <div class="h-32 bg-blue-100 rounded-lg w-full flex items-center justify-center relative overflow-hidden group cursor-default">
+                            <span class="text-blue-400 font-bold text-2xl group-hover:scale-110 transition-transform duration-500">Your Future Website</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="h-24 bg-green-50 rounded-lg flex items-center justify-center border border-green-100">
+                                <span class="text-green-600 font-medium">Google Maps</span>
+                            </div>
+                            <div class="h-24 bg-purple-50 rounded-lg flex items-center justify-center border border-purple-100">
+                                <span class="text-purple-600 font-medium">Reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works / Services Section -->
+    <section id="how-it-works" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What We Provide</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">You run your business. We run your website. Here is exactly what we do for you.</p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-24">
+                <!-- Card 1 -->
+                <div class="feature-card p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Custom Web Design</h3>
+                    <p class="text-slate-600 leading-relaxed">We build a clean, modern website tailored to your brand. No templates that look like everyone else's.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-green-200 hover:shadow-xl hover:shadow-green-500/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center text-green-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Domain & Hosting</h3>
+                    <p class="text-slate-600 leading-relaxed">We handle the technical boring stuff. You get a .com domain and fast, secure hosting included.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="feature-card p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:border-purple-200 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Google Growth</h3>
+                    <p class="text-slate-600 leading-relaxed">Show up where it matters. We manage your Google Profile and automate 5-star review collection.</p>
+                </div>
+            </div>
+
+            <!-- The Process Section -->
+            <div class="max-w-5xl mx-auto process-container opacity-0">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-bold uppercase tracking-wider text-sm mb-2 block">The Journey</span>
+                    <h3 class="text-3xl font-bold text-slate-900">From Idea to Online in 3 Steps</h3>
+                </div>
+                
+                <div class="relative">
+                    <!-- Desktop Connecting Line -->
+                    <div class="hidden md:block absolute top-[50px] left-0 w-full h-1 bg-slate-100 -z-10">
+                        <div class="h-full bg-blue-100 w-full"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <!-- Step 1 -->
+                        <div class="relative text-center step-card">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-full flex items-center justify-center border-4 border-blue-100 shadow-sm mb-6 relative z-10">
+                                <span class="text-4xl">👋</span>
+                                <div class="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-slate-900">Connect & Plan</h4>
+                            <p class="text-slate-600 leading-relaxed">Fill out the form or give us a call. We'll chat for 15 minutes to understand your business style and goals.</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative text-center step-card">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-full flex items-center justify-center border-4 border-purple-100 shadow-sm mb-6 relative z-10">
+                                <span class="text-4xl">🎨</span>
+                                <div class="absolute -top-2 -right-2 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-slate-900">We Build It</h4>
+                            <p class="text-slate-600 leading-relaxed">Sit back while we design your site, write the content, and set up your hosting. You get a preview link to approve.</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative text-center step-card">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-full flex items-center justify-center border-4 border-green-100 shadow-sm mb-6 relative z-10">
+                                <span class="text-4xl">🚀</span>
+                                <div class="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3 text-slate-900">Launch & Grow</h4>
+                            <p class="text-slate-600 leading-relaxed">We connect your domain and push it live to the world. Then we set up your Google Business profile to start getting reviews.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="#contact" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                        Ready to start step 1? 
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-slate-900 relative overflow-hidden">
+        <!-- Background accents -->
+        <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Transparent Pricing</h2>
+                <p class="text-lg text-slate-400">No hidden setup fees. Start with a 2-week free trial.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 hover:border-slate-500 transition-colors relative flex flex-col">
+                    <h3 class="text-xl font-semibold text-white mb-2">Essential Presence</h3>
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-4xl font-bold text-white">$79</span>
+                        <span class="text-slate-400 ml-2">/month</span>
+                    </div>
+                    <p class="text-slate-400 mb-8">Perfect for individuals and small shops needing a professional look.</p>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center text-slate-300">
+                            <svg class="w-5 h-5 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Basic Web Design
+                        </li>
+                        <li class="flex items-center text-slate-300">
+                            <svg class="w-5 h-5 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Managed Hosting & Security
+                        </li>
+                        <li class="flex items-center text-slate-300">
+                            <svg class="w-5 h-5 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Custom Domain Name
+                        </li>
+                        <li class="flex items-center text-slate-300">
+                            <svg class="w-5 h-5 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Monthly Content Updates
+                        </li>
+                    </ul>
+
+                    <a href="#contact" onclick="selectPlan('Basic')" class="block w-full text-center py-4 rounded-xl bg-slate-700 text-white font-semibold hover:bg-slate-600 transition-colors">Choose Basic</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-gradient-to-b from-blue-900 to-slate-800 rounded-3xl p-8 border border-blue-500 relative flex flex-col transform md:-translate-y-4 shadow-2xl">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Most Popular</div>
+                    <h3 class="text-xl font-semibold text-white mb-2">Growth Partner</h3>
+                    <div class="flex items-baseline mb-6">
+                        <span class="text-4xl font-bold text-white">$119</span>
+                        <span class="text-blue-200 ml-2">/month</span>
+                    </div>
+                    <p class="text-blue-100 mb-8">For businesses that want to dominate their local market.</p>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center text-white">
+                            <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="font-semibold">Everything in Basic</span>
+                        </li>
+                        <li class="flex items-center text-white">
+                            <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Google Business Profile Setup
+                        </li>
+                        <li class="flex items-center text-white">
+                            <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Review Rating Automation
+                        </li>
+                        <li class="flex items-center text-white">
+                            <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Priority Support
+                        </li>
+                    </ul>
+
+                    <a href="#contact" onclick="selectPlan('Growth')" class="block w-full text-center py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-slate-100">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Let's Get Started</h2>
+                    <p class="text-slate-600">Fill out the form below. We'll call you to chat about your needs.</p>
+                </div>
+
+                <form class="space-y-6" id="leadForm" onsubmit="handleFormSubmit(event)">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Your Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Business Name (Optional)</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="John's Bakery">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="john@example.com">
+                    </div>
+
+                    <!-- Custom Phone Input Component -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
+                        <div class="flex gap-2">
+                            <!-- Custom Select for Country Code -->
+                            <div class="w-32 relative custom-select-wrapper">
+                                <div class="custom-select w-full px-3 py-3 rounded-lg border border-slate-200 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all flex items-center justify-between" id="country-select-trigger">
+                                    <div class="selected-option text-sm" id="selected-country">
+                                        <span>🇺🇸</span> +1
+                                    </div>
+                                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                                <div class="custom-options" id="country-options">
+                                    <!-- Options populated by JS -->
+                                </div>
+                                <input type="hidden" name="countryCode" id="hiddenCountryCode" value="+1">
+                            </div>
+                            <!-- Phone Number Input -->
+                            <input type="tel" required class="flex-1 w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="(555) 000-0000">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Interested Plan</label>
+                        <select id="plan-selector" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white">
+                            <option value="Unsure">I'm not sure yet</option>
+                            <option value="Basic">Essential Presence ($79/mo)</option>
+                            <option value="Growth">Growth Partner ($119/mo)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Message (Optional)</label>
+                        <textarea rows="3" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all" placeholder="Tell us about your business..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-1">
+                        Get My Free 2-Week Trial
+                    </button>
+                    <p class="text-xs text-center text-slate-400 mt-4">We respect your privacy. No spam, ever.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                </div>
+                <span class="font-bold text-xl text-white">SwiftLoop</span>
+            </div>
+            <div class="text-sm">
+                &copy; <span id="year"></span> SwiftLoop Web Services. All rights reserved.
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-blue-400 transition-colors">Privacy</a>
+                <a href="#" class="hover:text-blue-400 transition-colors">Terms</a>
+                <a href="mailto:hello@swiftloop.com" class="hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Remove Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                
+                // Trigger Hero Animations after load
+                gsap.to('.hero-dashboard', {
+                    rotateX: 10,
+                    duration: 2,
+                    ease: "power2.out"
+                });
+            }, 500);
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade Up Elements
+        const fadeUps = document.querySelectorAll('.fade-in-up');
+        gsap.fromTo(fadeUps, 
+            { opacity: 0, y: 30 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.8, 
+                stagger: 0.1, 
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".fade-in-up",
+                    start: "top 85%"
+                }
+            }
+        );
+
+        // Feature Cards Stagger (using fromTo to ensure visibility)
+        gsap.fromTo(".feature-card", 
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: "#how-it-works",
+                    start: "top 75%"
+                }
+            }
+        );
+
+        // Process Section Animation
+        gsap.fromTo(".process-container", 
+            { opacity: 0, y: 40 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".process-container",
+                    start: "top 80%"
+                }
+            }
+        );
+
+        gsap.fromTo(".step-card", 
+            { opacity: 0, scale: 0.8 },
+            {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: "back.out(1.5)",
+                scrollTrigger: {
+                    trigger: ".process-container",
+                    start: "top 70%"
+                }
+            }
+        );
+
+        // Pre-select plan from buttons
+        function selectPlan(plan) {
+            const selector = document.getElementById('plan-selector');
+            selector.value = plan;
+        }
+
+        /* --- Custom Country Selector Logic --- */
+        const countries = [
+            { code: 'US', dial: '+1', flag: '🇺🇸', name: 'USA' },
+            { code: 'GB', dial: '+44', flag: '🇬🇧', name: 'UK' },
+            { code: 'CA', dial: '+1', flag: '🇨🇦', name: 'Canada' },
+            { code: 'AU', dial: '+61', flag: '🇦🇺', name: 'Australia' },
+            { code: 'NZ', dial: '+64', flag: '🇳🇿', name: 'NZ' },
+            { code: 'IE', dial: '+353', flag: '🇮🇪', name: 'Ireland' },
+            { code: 'FR', dial: '+33', flag: '🇫🇷', name: 'France' },
+            { code: 'DE', dial: '+49', flag: '🇩🇪', name: 'Germany' },
+            { code: 'ES', dial: '+34', flag: '🇪🇸', name: 'Spain' },
+            { code: 'IT', dial: '+39', flag: '🇮🇹', name: 'Italy' },
+            { code: 'MX', dial: '+52', flag: '🇲🇽', name: 'Mexico' },
+            { code: 'IN', dial: '+91', flag: '🇮🇳', name: 'India' },
+            { code: 'BR', dial: '+55', flag: '🇧🇷', name: 'Brazil' },
+            { code: 'ZA', dial: '+27', flag: '🇿🇦', name: 'S. Africa' },
+            { code: 'AE', dial: '+971', flag: '🇦🇪', name: 'UAE' },
+        ];
+
+        const selectTrigger = document.getElementById('country-select-trigger');
+        const optionsContainer = document.getElementById('country-options');
+        const selectedDisplay = document.getElementById('selected-country');
+        const hiddenInput = document.getElementById('hiddenCountryCode');
+
+        // Populate options
+        countries.forEach(country => {
+            const option = document.createElement('div');
+            option.className = 'option hover:bg-slate-50 text-sm text-slate-700';
+            option.innerHTML = `<span>${country.flag}</span> <span class="font-medium w-8">${country.dial}</span> <span class="text-slate-500 truncate">${country.name}</span>`;
+            option.addEventListener('click', (e) => {
+                selectedDisplay.innerHTML = `<span>${country.flag}</span> ${country.dial}`;
+                hiddenInput.value = country.dial;
+                optionsContainer.parentElement.classList.remove('open');
+                e.stopPropagation();
+            });
+            optionsContainer.appendChild(option);
+        });
+
+        // Toggle dropdown
+        selectTrigger.addEventListener('click', (e) => {
+            selectTrigger.parentElement.classList.toggle('open');
+            e.stopPropagation();
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!selectTrigger.parentElement.contains(e.target)) {
+                selectTrigger.parentElement.classList.remove('open');
+            }
+        });
+
+        // Form handling
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            // Simulate sending (Since there is no backend connected)
+            setTimeout(() => {
+                alert("Thanks for your interest! Since this is a demo, no data was sent. In a real version, this would email you.");
+                btn.innerText = "Sent!";
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                e.target.reset();
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75', 'bg-green-500', 'hover:bg-green-600');
+                    btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }, 3000);
+            }, 1500);
+        }
+
+        // Mouse move parallax for hero blobs
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            gsap.to('.blob', {
+                x: x * 50,
+                y: y * 50,
+                duration: 2,
+                ease: "power2.out"
+            });
+        });
+
+    </script>
+</body>
+</html>
