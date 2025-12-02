@@ -82,7 +82,7 @@
             border: 1px solid #e2e8f0;
             border-top: none;
             background: white;
-            transition: all 0.3s opacity;
+            transition: all 0.3s opacity, transform 0.3s ease;
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
@@ -91,12 +91,24 @@
             overflow-y: auto;
             border-radius: 0 0 0.5rem 0.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
         }
-        .custom-select.open .custom-options {
+        /* Fixed CSS Selector: Targets the wrapper having the 'open' class */
+        .custom-select-wrapper.open .custom-options {
             opacity: 1;
             visibility: visible;
             pointer-events: all;
+            transform: translateY(0);
         }
+        
+        /* Arrow Rotation */
+        .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+        .custom-select-wrapper.open .arrow-icon {
+            transform: rotate(180deg);
+        }
+
         .option {
             padding: 0.75rem 1rem;
             cursor: pointer;
@@ -466,7 +478,7 @@
                                     <div class="selected-option text-sm" id="selected-country">
                                         <span>🇺🇸</span> +1
                                     </div>
-                                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    <svg class="arrow-icon w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                                 <div class="custom-options" id="country-options">
                                     <!-- Options populated by JS -->
