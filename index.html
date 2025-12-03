@@ -143,11 +143,12 @@
 
     <!-- Dynamic Favicon Generation Script -->
     <script>
-        // Generate a simple SVG favicon on the fly
+        // Generate the favicon matching the header logo (Blue circle with white icon)
         const link = document.createElement('link');
         link.type = 'image/svg+xml';
         link.rel = 'icon';
-        link.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%233b82f6"/><path d="M30 50 Q 50 20 70 50 T 30 50" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/></svg>`;
+        // ViewBox 0 0 40 40 to match the w-10 h-10 container ratio with w-6 h-6 icon
+        link.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="%233b82f6"/><path transform="translate(8,8)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>`;
         document.head.appendChild(link);
     </script>
 
