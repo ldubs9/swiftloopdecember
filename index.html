@@ -376,9 +376,9 @@
                 <p class="text-lg text-slate-400">No hidden setup fees. Start with a 2-week free trial.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
                 <!-- Basic Plan -->
-                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 hover:border-slate-500 transition-colors relative flex flex-col">
+                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 hover:border-slate-500 transition-colors relative flex flex-col h-full">
                     <h3 class="text-xl font-semibold text-white mb-2">Essential Presence</h3>
                     <div class="flex items-baseline mb-6">
                         <span class="text-4xl font-bold text-white">$79</span>
@@ -405,11 +405,11 @@
                         </li>
                     </ul>
 
-                    <a href="#contact" onclick="selectPlan('Basic')" class="block w-full text-center py-4 rounded-xl bg-slate-700 text-white font-semibold hover:bg-slate-600 transition-colors">Choose Basic</a>
+                    <a href="#contact" onclick="selectPlan('Basic')" class="block w-full text-center py-4 rounded-xl bg-slate-700 text-white font-semibold hover:bg-slate-600 transition-colors mt-auto">Choose Basic</a>
                 </div>
 
                 <!-- Pro Plan -->
-                <div class="bg-gradient-to-b from-blue-900 to-slate-800 rounded-3xl p-8 border border-blue-500 relative flex flex-col transform md:-translate-y-4 shadow-2xl">
+                <div class="bg-gradient-to-b from-blue-900 to-slate-800 rounded-3xl p-8 border border-blue-500 relative flex flex-col shadow-2xl h-full">
                     <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Most Popular</div>
                     <h3 class="text-xl font-semibold text-white mb-2">Growth Partner</h3>
                     <div class="flex items-baseline mb-6">
@@ -422,6 +422,10 @@
                         <li class="flex items-center text-white">
                             <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <span class="font-semibold">Everything in Basic</span>
+                        </li>
+                         <li class="flex items-center text-white">
+                            <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Monthly Content Updates
                         </li>
                         <li class="flex items-center text-white">
                             <svg class="w-5 h-5 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
@@ -437,7 +441,7 @@
                         </li>
                     </ul>
 
-                    <a href="#contact" onclick="selectPlan('Growth')" class="block w-full text-center py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">Start Free Trial</a>
+                    <a href="#contact" onclick="selectPlan('Growth')" class="block w-full text-center py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 mt-auto">Start Free Trial</a>
                 </div>
             </div>
         </div>
@@ -496,7 +500,7 @@
                         <select id="plan-selector" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white">
                             <option value="Unsure">I'm not sure yet</option>
                             <option value="Basic">Essential Presence ($79/mo)</option>
-                            <option value="Growth">Growth Partner ($119/mo)</option>
+                            <option value="Growth">Growth Partner ($139/mo)</option>
                         </select>
                     </div>
 
