@@ -326,6 +326,7 @@
                 <span class="text-xs text-brand-beige-muted hidden sm:inline">Currency:</span>
                 <div class="flex bg-brand-surface rounded-md border border-brand-border overflow-hidden">
                     <button onclick="setCurrency('USD')" id="curr-USD" class="currency-btn px-3 py-1 text-xs font-medium transition-colors bg-brand-orange text-white">USD</button>
+                    <button onclick="setCurrency('GBP')" id="curr-GBP" class="currency-btn px-3 py-1 text-xs font-medium transition-colors text-brand-beige-muted hover:text-white">GBP</button>
                     <button onclick="setCurrency('AED')" id="curr-AED" class="currency-btn px-3 py-1 text-xs font-medium transition-colors text-brand-beige-muted hover:text-white">AED</button>
                     <button onclick="setCurrency('EUR')" id="curr-EUR" class="currency-btn px-3 py-1 text-xs font-medium transition-colors text-brand-beige-muted hover:text-white">EUR</button>
                 </div>
@@ -560,6 +561,77 @@
                 </div>
             </div>
 
+            <!-- Recent Projects Section -->
+            <div class="mb-24">
+                <div class="text-center mb-16">
+                    <span class="text-brand-orange font-semibold uppercase tracking-wider text-sm mb-3 block">Our Work</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Recent Projects</h2>
+                    <p class="text-lg text-brand-beige-muted max-w-2xl mx-auto">A selection of websites we've recently designed and launched for our clients.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <a href="https://www.creativefinishings.com" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
+                        <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
+                            <img src="project1.png" alt="Project One - Business Website & Google Profile" class="absolute inset-0 w-full h-full object-cover">
+                            <!-- Hover overlay -->
+                            <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
+                                <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    <span class="text-white text-sm font-medium flex items-center gap-2">
+                                        View Project
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">Creative Finishings</h4>
+                            <p class="text-sm text-brand-beige-muted">Custom Business Website - Whatsapp Integration, Google Profile, Form Integration & SEO</p>
+                        </div>
+                    </a>
+
+                    <!-- Project 2 -->
+                    <a href="https://falcon-timepieces-platform.vercel.app" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
+                        <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
+                            <img src="project2.png" alt="Project Two - E-Commerce & WhatsApp Integration" class="absolute inset-0 w-full h-full object-cover">
+                            <!-- Hover overlay -->
+                            <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
+                                <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    <span class="text-white text-sm font-medium flex items-center gap-2">
+                                        View Project
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">Falcon Timepieces</h4>
+                            <p class="text-sm text-brand-beige-muted">Bespoke Watch Database - E-Commerce, WhatsApp Integration, AI Database Management</p>
+                        </div>
+                    </a>
+
+                    <!-- Project 3 -->
+                    <a href="https://www.3hmethod.info" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
+                        <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
+                            <img src="project3.png" alt="Project Three - Custom Dashboard & AI Chatbot" class="absolute inset-0 w-full h-full object-cover">
+                            <!-- Hover overlay -->
+                            <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
+                                <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                    <span class="text-white text-sm font-medium flex items-center gap-2">
+                                        View Project
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">3H Method</h4>
+                            <p class="text-sm text-brand-beige-muted">Custom Physical Therapy Website - Video Testimonials, Dynamic Background & Additional Pages</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
             <!-- The Process Section -->
             <div class="max-w-5xl mx-auto process-container opacity-0">
                 <div class="text-center mb-12">
@@ -631,14 +703,14 @@
 
             <!-- Billing Toggle -->
             <div class="flex items-center justify-center gap-4 mb-14">
-                <span id="label-monthly" class="text-sm font-medium text-white">Monthly</span>
+                <span id="label-monthly" class="text-sm font-medium text-brand-beige-muted">Monthly</span>
                 <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="billing-toggle" class="sr-only peer">
-                    <div class="toggle-bg w-14 h-7 bg-brand-border-light rounded-full peer-checked:bg-brand-orange">
+                    <input type="checkbox" id="billing-toggle" class="sr-only peer" checked>
+                    <div class="toggle-bg w-14 h-7 bg-brand-orange rounded-full peer-checked:bg-brand-orange">
                         <div class="toggle-dot absolute top-0.5 left-0.5 bg-white w-6 h-6 rounded-full shadow-md"></div>
                     </div>
                 </label>
-                <span id="label-yearly" class="text-sm font-medium text-brand-beige-muted">Yearly <span class="text-brand-orange text-xs font-bold ml-1">Save 15%</span></span>
+                <span id="label-yearly" class="text-sm font-medium text-white">Yearly <span class="text-brand-orange text-xs font-bold ml-1">Save 15%</span></span>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
@@ -646,15 +718,15 @@
                 <div class="pricing-card bg-brand-card rounded-2xl p-8 border border-brand-border hover:border-brand-border-light relative flex flex-col h-full">
                     <h3 class="text-lg font-semibold text-brand-beige-muted mb-2 uppercase tracking-wide">Basic</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="99" data-aed="365" data-eur="91">
+                        <span class="price-monthly text-4xl font-bold text-white hidden" data-usd="99" data-gbp="77" data-aed="365" data-eur="91">
                             <span class="currency-symbol">$</span><span class="price-value">99</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="84" data-aed="310" data-eur="77">
+                        <span class="price-yearly text-4xl font-bold text-white" data-usd="84" data-gbp="66" data-aed="310" data-eur="77">
                             <span class="currency-symbol">$</span><span class="price-value">84</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
-                    <div class="price-yearly hidden mb-1">
+                    <div class="price-yearly mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
                             <span class="currency-symbol">$</span><span class="original-price-value">99</span>/mo
                         </span>
@@ -701,15 +773,15 @@
                     <div class="absolute top-0 right-0 bg-brand-orange text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Most Popular</div>
                     <h3 class="text-lg font-semibold text-brand-orange mb-2 uppercase tracking-wide">Premium</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="219" data-aed="805" data-eur="201">
+                        <span class="price-monthly text-4xl font-bold text-white hidden" data-usd="219" data-gbp="171" data-aed="805" data-eur="201">
                             <span class="currency-symbol">$</span><span class="price-value">219</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="186" data-aed="684" data-eur="171">
+                        <span class="price-yearly text-4xl font-bold text-white" data-usd="186" data-gbp="145" data-aed="684" data-eur="171">
                             <span class="currency-symbol">$</span><span class="price-value">186</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
-                    <div class="price-yearly hidden mb-1">
+                    <div class="price-yearly mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
                             <span class="currency-symbol">$</span><span class="original-price-value">219</span>/mo
                         </span>
@@ -760,15 +832,15 @@
                     <div class="absolute top-0 right-0 bg-brand-border-light text-brand-beige text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Full Service</div>
                     <h3 class="text-lg font-semibold text-brand-beige-muted mb-2 uppercase tracking-wide">Custom</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="479" data-aed="1,759" data-eur="441">
+                        <span class="price-monthly text-4xl font-bold text-white hidden" data-usd="479" data-gbp="374" data-aed="1,759" data-eur="441">
                             <span class="currency-symbol">$</span><span class="price-value">479</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="407" data-aed="1,495" data-eur="375">
+                        <span class="price-yearly text-4xl font-bold text-white" data-usd="407" data-gbp="318" data-aed="1,495" data-eur="375">
                             <span class="currency-symbol">$</span><span class="price-value">407</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
-                    <div class="price-yearly hidden mb-1">
+                    <div class="price-yearly mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
                             <span class="currency-symbol">$</span><span class="original-price-value">479</span>/mo
                         </span>
@@ -813,78 +885,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-24 bg-brand-surface relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-brand-orange font-semibold uppercase tracking-wider text-sm mb-3 block">Our Work</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Recent Projects</h2>
-                <p class="text-lg text-brand-beige-muted max-w-2xl mx-auto">A selection of websites we've recently designed and launched for our clients.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <a href="https://www.creativefinishings.com" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
-                    <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
-                        <img src="project1.png" alt="Project One - Business Website & Google Profile" class="absolute inset-0 w-full h-full object-cover">
-                        <!-- Hover overlay -->
-                        <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
-                            <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <span class="text-white text-sm font-medium flex items-center gap-2">
-                                    View Project
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">Creative Finishings</h4>
-                        <p class="text-sm text-brand-beige-muted">Custom Business Website - Whatsapp Integration, Google Profile, Form Integration & SEO</p>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="https://falcon-timepieces-platform.vercel.app" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
-                    <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
-                        <img src="project2.png" alt="Project Two - E-Commerce & WhatsApp Integration" class="absolute inset-0 w-full h-full object-cover">
-                        <!-- Hover overlay -->
-                        <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
-                            <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <span class="text-white text-sm font-medium flex items-center gap-2">
-                                    View Project
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">Falcon Timepieces</h4>
-                        <p class="text-sm text-brand-beige-muted">Bespoke Watch Database - E-Commerce, WhatsApp Integration, AI Database Management</p>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="https://www.3hmethod.info" class="portfolio-card group block" target="_blank" rel="noopener noreferrer">
-                    <div class="relative rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/3]">
-                        <img src="project3.png" alt="Project Three - Custom Dashboard & AI Chatbot" class="absolute inset-0 w-full h-full object-cover">
-                        <!-- Hover overlay -->
-                        <div class="absolute inset-0 bg-brand-orange/0 group-hover:bg-brand-orange/10 transition-colors duration-300 flex items-end">
-                            <div class="w-full p-4 bg-gradient-to-t from-black/60 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <span class="text-white text-sm font-medium flex items-center gap-2">
-                                    View Project
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="text-lg font-semibold text-white group-hover:text-brand-orange transition-colors">3H Method</h4>
-                        <p class="text-sm text-brand-beige-muted">Custom Physical Therapy Website - Video Testimonials, Dynamic Background & Additional Pages</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-24 bg-brand-bg">
@@ -895,7 +895,7 @@
                     <p class="text-brand-beige-muted">Fill out the form below. We'll call you to chat about your needs.</p>
                 </div>
 
-                <form class="space-y-6" id="leadForm" action="https://formsubmit.co/swiftloop@gmail.com" method="POST">
+                <form class="space-y-6" id="leadForm" action="https://formsubmit.co/swiftloop.info" method="POST">
                     <!-- FormSubmit Configuration -->
                     <input type="hidden" name="_subject" value="New SwiftLoop Lead Form Submission">
                     <input type="hidden" name="_captcha" value="false">
@@ -992,7 +992,7 @@
 
         // --- Currency System ---
         let currentCurrency = 'USD';
-        const currencySymbols = { USD: '$', AED: 'AED ', EUR: '\u20AC' };
+        const currencySymbols = { USD: '$', GBP: '\u00A3', AED: 'AED ', EUR: '\u20AC' };
 
         function setCurrency(currency) {
             currentCurrency = currency;
@@ -1019,7 +1019,7 @@
             });
 
             // Update original prices for yearly
-            const originalMap = { usd: ['99', '219', '479'], aed: ['365', '805', '1,759'], eur: ['91', '201', '441'] };
+            const originalMap = { usd: ['99', '219', '479'], gbp: ['77', '171', '374'], aed: ['365', '805', '1,759'], eur: ['91', '201', '441'] };
             document.querySelectorAll('.original-price-value').forEach((el, i) => {
                 el.textContent = originalMap[key][i];
                 el.closest('.price-original').querySelector('.currency-symbol').textContent = symbol;
