@@ -241,6 +241,60 @@
             0%, 100% { transform: rotate(30deg) translate(0, 0); }
             50% { transform: rotate(30deg) translate(-10px, 10px); }
         }
+
+        /* Marquee Section */
+        :root {
+            --surface: #1a1a1a;
+            --border: #2d2d2d;
+            --beige-dark: #7a736c;
+            --orange: #e8783f;
+        }
+
+        .marquee-section {
+            padding: 40px 0;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            gap: 60px;
+            padding: 0 30px;
+        }
+
+        .marquee-item {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--beige-dark);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .marquee-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--orange);
+            border-radius: 50%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -444,6 +498,28 @@
             </div>
         </div>
     </section>
+
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span class="marquee-item">Custom Design</span>
+                <span class="marquee-item">Cloud Hosting</span>
+                <span class="marquee-item">SEO Optimization</span>
+                <span class="marquee-item">Mobile Responsive</span>
+                <span class="marquee-item">WhatsApp Integration</span>
+                <span class="marquee-item">Analytics</span>
+            </div>
+            <div class="marquee-content">
+                <span class="marquee-item">Custom Design</span>
+                <span class="marquee-item">Cloud Hosting</span>
+                <span class="marquee-item">SEO Optimization</span>
+                <span class="marquee-item">Mobile Responsive</span>
+                <span class="marquee-item">WhatsApp Integration</span>
+                <span class="marquee-item">Analytics</span>
+            </div>
+        </div>
+    </div>
 
     <!-- How It Works / Services Section -->
     <section id="how-it-works" class="py-24 bg-brand-surface relative">
@@ -1167,5 +1243,6 @@
             }, 1500);
         }
     </script>
+
 </body>
 </html>
