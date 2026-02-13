@@ -646,17 +646,17 @@
                 <div class="pricing-card bg-brand-card rounded-2xl p-8 border border-brand-border hover:border-brand-border-light relative flex flex-col h-full">
                     <h3 class="text-lg font-semibold text-brand-beige-muted mb-2 uppercase tracking-wide">Basic</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="79" data-aed="290" data-eur="73">
-                            <span class="currency-symbol">$</span><span class="price-value">79</span>
+                        <span class="price-monthly text-4xl font-bold text-white" data-usd="99" data-aed="365" data-eur="91">
+                            <span class="currency-symbol">$</span><span class="price-value">99</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="67" data-aed="246" data-eur="62">
-                            <span class="currency-symbol">$</span><span class="price-value">67</span>
+                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="84" data-aed="310" data-eur="77">
+                            <span class="currency-symbol">$</span><span class="price-value">84</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
                     <div class="price-yearly hidden mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
-                            <span class="currency-symbol">$</span><span class="original-price-value">79</span>/mo
+                            <span class="currency-symbol">$</span><span class="original-price-value">99</span>/mo
                         </span>
                         <span class="text-brand-orange text-xs font-semibold ml-2">Billed Yearly</span>
                     </div>
@@ -701,17 +701,17 @@
                     <div class="absolute top-0 right-0 bg-brand-orange text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Most Popular</div>
                     <h3 class="text-lg font-semibold text-brand-orange mb-2 uppercase tracking-wide">Premium</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="139" data-aed="510" data-eur="128">
-                            <span class="currency-symbol">$</span><span class="price-value">139</span>
+                        <span class="price-monthly text-4xl font-bold text-white" data-usd="219" data-aed="805" data-eur="201">
+                            <span class="currency-symbol">$</span><span class="price-value">219</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="118" data-aed="433" data-eur="109">
-                            <span class="currency-symbol">$</span><span class="price-value">118</span>
+                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="186" data-aed="684" data-eur="171">
+                            <span class="currency-symbol">$</span><span class="price-value">186</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
                     <div class="price-yearly hidden mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
-                            <span class="currency-symbol">$</span><span class="original-price-value">139</span>/mo
+                            <span class="currency-symbol">$</span><span class="original-price-value">219</span>/mo
                         </span>
                         <span class="text-brand-orange text-xs font-semibold ml-2">Billed Yearly</span>
                     </div>
@@ -760,17 +760,17 @@
                     <div class="absolute top-0 right-0 bg-brand-border-light text-brand-beige text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-wide">Full Service</div>
                     <h3 class="text-lg font-semibold text-brand-beige-muted mb-2 uppercase tracking-wide">Custom</h3>
                     <div class="flex items-baseline mb-2">
-                        <span class="price-monthly text-4xl font-bold text-white" data-usd="359" data-aed="1,319" data-eur="330">
-                            <span class="currency-symbol">$</span><span class="price-value">359</span>
+                        <span class="price-monthly text-4xl font-bold text-white" data-usd="479" data-aed="1,759" data-eur="441">
+                            <span class="currency-symbol">$</span><span class="price-value">479</span>
                         </span>
-                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="305" data-aed="1,120" data-eur="281">
-                            <span class="currency-symbol">$</span><span class="price-value">305</span>
+                        <span class="price-yearly text-4xl font-bold text-white hidden" data-usd="407" data-aed="1,495" data-eur="375">
+                            <span class="currency-symbol">$</span><span class="price-value">407</span>
                         </span>
                         <span class="text-brand-beige-dark ml-2">/month</span>
                     </div>
                     <div class="price-yearly hidden mb-1">
                         <span class="price-original text-brand-beige-dark text-sm inline-block">
-                            <span class="currency-symbol">$</span><span class="original-price-value">359</span>/mo
+                            <span class="currency-symbol">$</span><span class="original-price-value">479</span>/mo
                         </span>
                         <span class="text-brand-orange text-xs font-semibold ml-2">Billed Yearly</span>
                     </div>
@@ -895,21 +895,26 @@
                     <p class="text-brand-beige-muted">Fill out the form below. We'll call you to chat about your needs.</p>
                 </div>
 
-                <form class="space-y-6" id="leadForm" onsubmit="handleFormSubmit(event)">
+                <form class="space-y-6" id="leadForm" action="https://formsubmit.co/swiftloop@gmail.com" method="POST">
+                    <!-- FormSubmit Configuration -->
+                    <input type="hidden" name="_subject" value="New SwiftLoop Lead Form Submission">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-medium text-brand-beige-muted mb-2">Your Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="John Doe">
+                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="John Doe">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-brand-beige-muted mb-2">Business Name (Optional)</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="John's Bakery">
+                            <input type="text" name="business_name" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="John's Bakery">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-brand-beige-muted mb-2">Email Address</label>
-                        <input type="email" required class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="john@example.com">
+                        <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="john@example.com">
                     </div>
 
                     <!-- Custom Phone Input Component -->
@@ -930,23 +935,23 @@
                                 <input type="hidden" name="countryCode" id="hiddenCountryCode" value="+1">
                             </div>
                             <!-- Phone Number Input -->
-                            <input type="tel" required class="flex-1 w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="(555) 000-0000">
+                            <input type="tel" name="phone" required class="flex-1 w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="(555) 000-0000">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-brand-beige-muted mb-2">Interested Plan</label>
-                        <select id="plan-selector" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all">
+                        <select id="plan-selector" name="interested_plan" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all">
                             <option value="Unsure">I'm not sure yet</option>
-                            <option value="Basic">Basic ($79/mo)</option>
-                            <option value="Premium">Premium ($139/mo)</option>
-                            <option value="Custom">Custom ($359/mo)</option>
+                            <option value="Basic">Basic ($99/mo)</option>
+                            <option value="Premium">Premium ($219/mo)</option>
+                            <option value="Custom">Custom ($479/mo)</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-brand-beige-muted mb-2">Message (Optional)</label>
-                        <textarea rows="3" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="Tell us about your business..."></textarea>
+                        <textarea rows="3" name="message" class="w-full px-4 py-3 rounded-lg border border-brand-border bg-brand-surface text-white placeholder-brand-beige-dark focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none transition-all" placeholder="Tell us about your business..."></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orange-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-orange/20 transition-all transform hover:-translate-y-1">
@@ -1014,7 +1019,7 @@
             });
 
             // Update original prices for yearly
-            const originalMap = { usd: ['79', '139', '359'], aed: ['290', '510', '1,319'], eur: ['73', '128', '330'] };
+            const originalMap = { usd: ['99', '219', '479'], aed: ['365', '805', '1,759'], eur: ['91', '201', '441'] };
             document.querySelectorAll('.original-price-value').forEach((el, i) => {
                 el.textContent = originalMap[key][i];
                 el.closest('.price-original').querySelector('.currency-symbol').textContent = symbol;
